@@ -1,13 +1,13 @@
 #!/bin/sh
 #################################################################
-#Copyright (c) 2002-2017 SIMCom Wireless Solutions Co.,Ltd.. 
-#All rights reserved. 
+#Copyright (c) 2002-2017 SIMCom Wireless Solutions Co.,Ltd..
+#All rights reserved.
 #################################################################
 
 #config compile env
 Local_lincense=@172.21.1.76
-TOOLCHAIN_PATH="/opt/QualComm/RVCT5.05b106/bin"
-export ARMLMD_LICENSE_FILE=$Local_lincense
+TOOLCHAIN_PATH="${HOME}/ARM_Compiler_5.06u6/bin"
+export ARMLMD_LICENSE_FILE="${HOME}/ARM_Compiler_5.06u6/license.dat"
 
 DAM_RO_BASE=0x42000000
 DAM_OUTPUT_PATH="./bin"
@@ -44,7 +44,7 @@ fi
 
 echo "Application RO base selected = $DAM_RO_BASE"
 
-export DAM_CPPFLAGS="-DT_ARM -D__RVCT__ -D_ARM_ASM_ -DQAPI_TXM_MODULE -DTXM_MODULE -DTX_DAM_QC_CUSTOMIZATIONS -DTX_ENABLE_PROFILING -DTX_ENABLE_EVENT_TRACE -DTX_DISABLE_NOTIFY_CALLBACKS -DTX_DAM_QC_CUSTOMIZATIONS" 
+export DAM_CPPFLAGS="-DT_ARM -D__RVCT__ -D_ARM_ASM_ -DQAPI_TXM_MODULE -DTXM_MODULE -DTX_DAM_QC_CUSTOMIZATIONS -DTX_ENABLE_PROFILING -DTX_ENABLE_EVENT_TRACE -DTX_DISABLE_NOTIFY_CALLBACKS -DTX_DAM_QC_CUSTOMIZATIONS"
 
 export DAM_CFLAGS="-O1 --diag_suppress=9931 --diag_error=warning --cpu=Cortex-A7 --protect_stack --arm_only --apcs=/interwork"
 
@@ -61,7 +61,7 @@ if [ ! -d $TS_APP_OUTPUT_PATH ]; then
 fi
 
 if [ ! -d $DAM_OUTPUT_PATH ]; then
-    mkdir $DAM_OUTPUT_PATH 
+    mkdir $DAM_OUTPUT_PATH
 fi
 
 $TOOLCHAIN_PATH/armcc -E -g $DAM_CPPFLAGS $DAM_CFLAGS $DAM_SRC_PATH/txm_module_preamble.S > txm_module_preamble_pp.S
